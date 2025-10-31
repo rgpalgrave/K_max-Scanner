@@ -616,7 +616,7 @@ def _count_max_intersection_order(
 
     # Count intersections at each unique point
     k_max = 0
-    count_tol = max(1e-3, tol * 1000)
+    count_tol = max(1e-5, tol * 1000)
 
     for cluster_id in unique_clusters:
         if len(points) > 1:
