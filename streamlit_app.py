@@ -17,6 +17,13 @@ import io
 import json
 
 # Try to import the scanner and lattice modules
+import sys
+from pathlib import Path
+
+# Add current directory to path
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
+
 try:
     from parameter_scanner import ParameterScanner, export_to_csv
     from lattice_intersections import (
@@ -24,9 +31,12 @@ try:
         max_sphere_surface_intersection_fast,
     )
     MODULES_AVAILABLE = True
-except ImportError:
+except ImportError as e:
     MODULES_AVAILABLE = False
-    st.error("⚠️ Required modules not found. Please ensure parameter_scanner.py and lattice_intersections.py are in the same directory.")
+    st.error(f"⚠️ Required modules not found: {str(e)}")
+    st.info("Make sure these files are in the same directory as streamlit_app.py:")
+    st.info("- parameter_scanner.py")
+    st.info("- lattice_intersections.py")
 
 
 # Page configuration
